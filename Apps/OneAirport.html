@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>Hello World!</title>
+  <script src="../Build/Cesium/Cesium.js"></script>
+  <script src="../Build/Cesium/jquery-3.2.1.min.js"></script>
+  <style>
+      @import url(../Build/Cesium/Widgets/widgets.css);
+      html, body, #cesiumContainer {
+          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+      }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <script>
+      var djk3d = [];
+      var gdm3d1 = [];
+      var gdm3d2 = [];
+      var nspm3d1 = [];
+      var nspm3d2 = [];
+      var zxm3d1 = [];
+      var zxm3d2 = [];
+      var wspm3d1 = [];
+      var wspm3d2 = [];
+      var wspm3d3 = [];
+      var wspm3d4 = [];
+      var testsh = [
+          -108.0, 42.0, 0,
+          -100.0, 42.0, 0,
+          -104.0, 40.0, 0
+      ];
+      $(function () {
+          $.ajax({
+              type: "GET",
+              url: "3d.json",
+              dataType: "json",
+              success: function (data) {
+                  var djk = data.DJK3D;
+                  djk.forEach(function (item) {
+
+                      djk3d.push(item[1]);
+                      djk3d.push(item[0]);
+                      djk3d.push(item[2]);
+                  });
+                  var gdm1 = data.GDM3D_1;
+                  gdm1.forEach(function (item) {
+                      gdm3d1.push(item[1]);
+                      gdm3d1.push(item[0]);
+
+                      gdm3d1.push(item[2]);
+                  });
+                  var gdm2 = data.GDM3D_2;
+                  gdm2.forEach(function (item) {
+                      gdm3d2.push(item[1]);
+                      gdm3d2.push(item[0]);
+
+                      gdm3d2.push(item[2]);
+                  });
+                  var nspm1 = data.NSPM3D_1;
+                  nspm1.forEach(function (item) {
+                      nspm3d1.push(item[1]);
+                      nspm3d1.push(item[0]);
+
+                      nspm3d1.push(item[2]);
+                  });
+                  var nspm2 = data.NSPM3D_2;
+                  nspm2.forEach(function (item) {
+                      nspm3d2.push(item[1]);
+                      nspm3d2.push(item[0]);
+
+                      nspm3d2.push(item[2]);
+                  });
+                  var zxm1 = data.ZXM3D_1;
+                  zxm1.forEach(function (item) {
+                      zxm3d1.push(item[1]);
+                      zxm3d1.push(item[0]);
+
+                      zxm3d1.push(item[2]);
+                  });
+                  var zxm2 = data.ZXM3D_2;
+                  zxm2.forEach(function (item) {
+                      zxm3d2.push(item[1]);
+                      zxm3d2.push(item[0]);
+
+                      zxm3d2.push(item[2]);
+                  });
+                  var wspm1 = data.WSPM3D_1;
+                  wspm1.forEach(function (item) {
+                      wspm3d1.push(item[1]);
+                      wspm3d1.push(item[0]);
+
+                      wspm3d1.push(item[2]);
+                  });
+                  var wspm2 = data.WSPM3D_2;
+                  wspm2.forEach(function (item) {
+                      wspm3d2.push(item[1]);
+                      wspm3d2.push(item[0]);
+
+                      wspm3d2.push(item[2]);
+                  });
+                  var wspm3 = data.WSPM3D_3;
+                  wspm3.forEach(function (item) {
+                      wspm3d3.push(item[1]);
+                      wspm3d3.push(item[0]);
+
+                      wspm3d3.push(item[2]);
+                  });
+                  var wspm4 = data.WSPM3D_4;
+                  wspm4.forEach(function (item) {
+                      wspm3d4.push(item[1]);
+                      wspm3d4.push(item[0]);
+                      wspm3d4.push(item[2]);
+                  });
+                  testfunction();
+              }
+          });
+      });
+
+      var djk = {
+          "id" : "djk",
+          "name" : "djk",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : djk3d
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [255, 100, 0, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : true,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var gdm1 = {
+          "id" : "gdm1",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : gdm3d1
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [187, 255, 255, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : true,
+              "outlineColor" : {
+                  "rgba" : [187, 255, 255, 100]
+              }
+          }
+      };
+      var gdm2 = {
+          "id" : "gdm2",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : gdm3d2
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [187, 255, 255, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : true,
+              "outlineColor" : {
+                  "rgba" : [187, 255, 255, 100]
+              }
+          }
+      };
+      var nspm1 = {
+          "id" : "nspm1",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : nspm3d1
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [255, 100, 0, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var nspm2 = {
+          "id" : "nspm2",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : nspm3d2
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [255, 100, 0, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var zxm1 = {
+          "id" : "zxm1",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : zxm3d1
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [132, 112, 255, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var zxm2 = {
+          "id" : "zxm2",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : zxm3d2
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" :[132, 112, 255, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var wspm1 = {
+          "id" : "wspm1",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : wspm3d1
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [190, 190, 190, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var wspm2 = {
+          "id" : "wspm2",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : wspm3d2
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [190, 190, 190, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var wspm3 = {
+          "id" : "wspm3",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : wspm3d3
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [190, 190, 190, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var wspm4 = {
+          "id" : "wspm4",
+          "polygon" : {
+              "positions" : {
+                  "cartographicDegrees" : wspm3d4
+              },
+              "material" : {
+                  "solidColor" : {
+                      "color" : {
+                          "rgba" : [190, 190, 190, 100]
+                      }
+                  }
+              },
+              "extrudedHeight" : 0,
+              "perPositionHeight" : true,
+              "outline" : false,
+              "outlineColor" : {
+                  "rgba" : [255, 100, 0, 100]
+              }
+          }
+      };
+      var czml = [{
+          "id" : "document",
+          "name" : "CZML Geometries: Polygon",
+          "version" : "1.0"
+      }];
+      function testfunction() {
+          czml.push(djk);
+          czml.push(gdm1);
+          czml.push(gdm2);
+          czml.push(nspm1);
+          czml.push(nspm2);
+          czml.push(zxm1);
+          czml.push(zxm2);
+          czml.push(wspm1);
+          czml.push(wspm2);
+          czml.push(wspm3);
+          czml.push(wspm4);
+//          console.log(czml);
+          var viewer = new Cesium.Viewer('cesiumContainer');
+          var dataSourcePromise = Cesium.CzmlDataSource.load(czml);
+          viewer.dataSources.add(dataSourcePromise);
+          viewer.zoomTo(dataSourcePromise);
+      }
+  </script>
+</body>
+</html>
